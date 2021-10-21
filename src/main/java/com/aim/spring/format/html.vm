@@ -391,6 +391,7 @@
             resetTestForm() {
                 if (this.$refs.testForm) {
                     this.$refs.testForm.resetFields();
+                    this.testRespbody='';
                 }
             },
 

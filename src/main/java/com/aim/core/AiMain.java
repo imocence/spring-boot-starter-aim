@@ -36,11 +36,11 @@ public class AiMain {
 	/**
 	 * 请求接口路径
 	 */
-	private String reqUrl;
+	private String reqUrl = "http://127.0.0.1:8080/";
 	/**
 	 * 指定返回结果样式
 	 */
-	private String defResult;
+	private String defResult = "{\"result\":{\"result\":\"0\",\"msg\":\"成功\"}}";
 	/**
 	 * api框架类型
 	 */

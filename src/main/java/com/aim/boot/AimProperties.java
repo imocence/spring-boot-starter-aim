@@ -9,22 +9,18 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  */
 @ConfigurationProperties("aim")
 public class AimProperties {
-
     /**
      * 是否启动aim,此值便于在生产等环境启动程序时增加参数进行控制
      */
     private boolean enable = true;
-
     /**
      * 界面标题描述
      */
     private String title = "aim 接口文档";
-
     /**
      * 源码相对路径(支持多个,用英文逗号隔开)
      */
     private String sourcePath;
-
     /**
      * 文档版本号
      */
