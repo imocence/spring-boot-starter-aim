@@ -109,7 +109,7 @@
 - **直接启动项目, 敲入地址: http://localhost:8080/aim**
 
 ### 2.如果想生成离线文档怎么办?
-**支持html:**
+**支持html:生成后可以在自己的controller当中添加访问路径**
 ```java
 @Test
 public void buildHtml() throws Exception {

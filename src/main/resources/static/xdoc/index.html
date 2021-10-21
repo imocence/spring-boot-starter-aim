@@ -55,7 +55,7 @@
         <p class="uri" v-if="currentApiAction.methods.length > 0">只支持:
             <span v-for="m in currentApiAction.methods">{{m}} </span>
         </p>
-        <p class="uri" v-for="uri in currentApiAction.uris">接口地址: {{(currentApiModule.uris[0] ? currentApiModule.uris[0] + '/' : '') + uri}}</p>
+        <p class="uri" v-for="uri in currentApiAction.uris">接口地址: {{(currentApiModule.uris[0] ? currentApiModule.uris[0] : '') + uri}}</p>
         <p class="return">接口返回: {{currentApiAction.returnDesc}}</p>
 
         <el-collapse v-model="activeNames">
