@@ -116,7 +116,7 @@
             <h3>返回内容</h3>
             <br/>
             <div class="test-respbody">
-                <el-input ref="respbpdy" v-model="testRespbody" type="textarea" :rows="10" placeholder="返回内容..."></el-input>
+                <el-input ref="respbpdy" v-model="testRespbody" type="textarea" :rows="15" placeholder="返回内容..."></el-input>
             </div>
         </div>
     </div>
@@ -124,8 +124,6 @@
 
 <script type="text/javascript">
     window.apis = _apis_json;
-</script>
-<script type="text/javascript">
     window.Http = {};
     Http.ajax = function(url, params, method) {
 
@@ -140,7 +138,7 @@
 
         var search = '';
         if (params) {
-            for (var p in params) {
+            for (let p in params) {
                 if (params[p] == null || typeof(params[p]) === 'undefined') {
                     delete params[p];
                 } else {
@@ -200,7 +198,7 @@
         data() {
             return {
                 search: '',
-                activeNames: ['1', '2', '3'],
+                activeNames: ['1', '3'],
                 radio2: '1',
                 testRespbody: '',
                 apiModules: [],
@@ -223,7 +221,7 @@
 
         mounted() {
             if (!window.apis) {
-                var self = this;
+                let self = this;
                 fetch('apis').then(function(response) {
                     return response.json();
                 }).then(function(data) {
@@ -242,15 +240,14 @@
 
         computed: {
             reverseMenus() {
-                var menu = [];
-                var id = 1;
+                let menu = [];
+                let id = 1;
                 for (var i = 0; i < this.apiModules.length; i++) {
-                    var apiModule = this.apiModules[i];
-
-                    var children = [];
-
-                    for (var j = 0; j < apiModule.apiActions.length; j++) {
-                        var apiAction = apiModule.apiActions[j];
+                    let apiModule = this.apiModules[i];
+                    let children = [];
+                    let apiAction = [];
+                    for (let j = 0; j < apiModule.apiActions.length; j++) {
+                        apiAction = apiModule.apiActions[j];
                         apiAction.id = id++;//赋值一个ID
                         children.push({
                             label: apiAction.title,
@@ -258,7 +255,7 @@
                         });
                     }
 
-                    var item = {
+                    let item = {
                         label: apiModule.comment,
                         children: children,
                         data: apiAction
@@ -271,10 +268,10 @@
 
             reverseParam() {
                 if (this.currentApiAction) {
-                    var data = [];
+                    let data = [];
                     this.testForm = {};
-                    for (var i = 0; i < this.currentApiAction.param.length; i++) {
-                        var par = this.currentApiAction.param[i];
+                    for (let i = 0; i < this.currentApiAction.param.length; i++) {
+                        let par = this.currentApiAction.param[i];
                         data.push(par);
                         this.$set(this.testForm, par.paramName, '');//动态绑定监控
                     }
@@ -283,13 +280,10 @@
             },
 
             reverseResponse() {
-
-                var data = [];
-
+                let data = [];
                 if (this.currentApiAction && this.currentApiAction.returnObj) {
-
-                    for (var i = 0; i < this.currentApiAction.returnObj.fieldInfos.length; i++) {
-                        var par = this.currentApiAction.returnObj.fieldInfos[i];
+                    for (let i = 0; i < this.currentApiAction.returnObj.fieldInfos.length; i++) {
+                        let par = this.currentApiAction.returnObj.fieldInfos[i];
                         data.push({
                             paramName: par.name,
                             paramDesc: par.comment,
@@ -300,8 +294,8 @@
                 }
 
                 if (this.currentApiAction && this.currentApiAction.respParam && this.currentApiAction.respParam.length > 0) {
-                    for (var i = 0; i < this.currentApiAction.respParam.length; i++) {
-                        var par = this.currentApiAction.respParam[i];
+                    for (let i = 0; i < this.currentApiAction.respParam.length; i++) {
+                        let par = this.currentApiAction.respParam[i];
                         data.push({
                             paramName: par.paramName,
                             paramDesc: par.paramDesc,
@@ -316,7 +310,7 @@
             reverseRespbody() {
                 if (this.currentApiAction && this.currentApiAction.respbody) {
                     try {
-                        var obj = JSON.parse(this.currentApiAction.respbody);
+                        let obj = JSON.parse(this.currentApiAction.respbody);
                         return JSON.stringify(obj, null, 4);
                     } catch(e) {
 
@@ -327,7 +321,6 @@
         },
 
         methods: {
-
             fullData(data) {
                 if (data.properties && data.properties.title != null) {
                     this.title = data.properties.title;
@@ -346,7 +339,7 @@
             },
 
             checkChangeHandle(data, checked, indeterminate) {
-                var array = this.findModuleAndActionById(data.id);
+                let array = this.findModuleAndActionById(data.id);
                 if (array) {
                     this.currentApiModule = array[0];
                     this.currentApiAction = array[1];
@@ -360,10 +353,9 @@
             },
 
             findModuleAndActionById(id) {
-                for (var i = 0; i < this.apiModules.length; i++) {
-                    var apiModule = this.apiModules[i];
-
-                    for (var j = 0; j < apiModule.apiActions.length; j++) {
+                for (let i = 0; i < this.apiModules.length; i++) {
+                    let apiModule = this.apiModules[i];
+                    for (let j = 0; j < apiModule.apiActions.length; j++) {
                         if (apiModule.apiActions[j].id == id) {
                             return [apiModule, apiModule.apiActions[j]]
                         }
@@ -396,9 +388,8 @@
             },
 
             onTest() {
-                var self = this;
-
-                var uri = '';
+                let self = this;
+                let uri = window.location.protocol + '//' + window.location.host;
                 if (this.currentApiModule.uris.length > 0) {
                     uri += '/' + this.currentApiModule.uris[0];
                 }
@@ -406,8 +397,7 @@
                 if (this.currentApiAction.uris.length > 0) {
                     uri += '/' + this.currentApiAction.uris[0];
                 }
-                var requestType = this.request.type.toLocaleLowerCase();
-
+                let requestType = this.request.type.toLocaleLowerCase();
                 console.log('请求方式:', requestType, '请求数据:', this.testForm);
 
                 Http.ajax(uri, this.testForm, requestType).then((data) => {
