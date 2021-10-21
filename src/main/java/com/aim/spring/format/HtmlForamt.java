@@ -12,7 +12,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * @AUTO
  * @Author AIM
+ * @DATE 2021/10/21
  */
 public class HtmlForamt implements Format {
 
@@ -21,7 +23,7 @@ public class HtmlForamt implements Format {
 		InputStream in = HtmlForamt.class.getResourceAsStream("html.vm");
 		if (in != null) {
 			try {
-				String s = IOUtils.toString(in, "utf-8");
+				String s = IOUtils.toString(in, AimUtil.CHARSET);
 				Map<String, Object> properties = new HashMap<>();
 				properties.put("title", AimUtil.defaultString((String) apiDoc.getProperties().get("title"), "接口文档"));
 				properties.put("version", AimUtil.defaultString((String) apiDoc.getProperties().get("version"), "1.0"));
