@@ -123,7 +123,6 @@
 </div>
 
 <script type="text/javascript">
-    window.apis = _apis_json;
     window.Http = {};
     Http.ajax = function(url, params, method) {
 
@@ -193,6 +192,7 @@
     }
 </script>
 <script>
+    window.apis = _apis_json;
     new Vue({
         el: '#app',
         data() {
@@ -324,6 +324,7 @@
             fullData(data) {
                 if (data.properties && data.properties.title != null) {
                     this.title = data.properties.title;
+                    document.title = data.properties.title;
                 }
                 if (data.properties && data.properties.version != null) {
                     this.version = data.properties.version;

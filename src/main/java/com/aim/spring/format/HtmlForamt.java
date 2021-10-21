@@ -22,9 +22,11 @@ public class HtmlForamt implements Format {
 		if (in != null) {
 			try {
 				String s = IOUtils.toString(in, "utf-8");
-
+				Map<String, Object> properties = new HashMap<>();
+				properties.put("title", AimUtil.defaultString((String) apiDoc.getProperties().get("title"), "接口文档"));
+				properties.put("version", AimUtil.defaultString((String) apiDoc.getProperties().get("version"), "1.0"));
 				Map<String, Object> model = new HashMap<>();
-				model.put("title", AimUtil.defaultString((String) apiDoc.getProperties().get("title"), "接口文档"));
+				model.put("properties", properties);
 				model.put("apiModules", apiDoc.getApiModules());
 
 				return s.replace("_apis_json", JsonUtils.toJson(model));

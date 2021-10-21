@@ -1,4 +1,5 @@
 import com.aim.core.AiMain;
+import com.aim.core.model.ApiDoc;
 import com.aim.spring.format.HtmlForamt;
 import com.aim.spring.format.MarkdownFormat;
 import com.aim.spring.framework.SpringWebFramework;
@@ -6,6 +7,8 @@ import com.aim.spring.framework.SpringWebFramework;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Author AIM
@@ -22,8 +25,10 @@ public class demo {
 		//生成离线的HTML格式的接口文档
 		String userDir = System.getProperty("user.dir");
 		FileOutputStream out = new FileOutputStream(new File(userDir, "api.html"));
+		Map<String, Object> properties = new HashMap<>();
+		properties.put("title", "项目接口文档");
 		AiMain aim = new AiMain(userDir + "/src/main/java/com/aim/controller", new SpringWebFramework());
-		aim.build(out, new HtmlForamt());
+		aim.build(out, new HtmlForamt(), properties);
 	}
 
 	private static void buildMarkdown() {
