@@ -35,7 +35,6 @@ public class VelocityTemplater {
 
     public String parse(Map<String, Object> param) {
 
-//        Template template = ve.getTemplate("com/jAIM/test/netty/template/" + name + ".vm", ENCODING);
         Template template = ve.getTemplate(path, ENCODING);
 
         VelocityContext velocityContext = new VelocityContext();
@@ -49,5 +48,4 @@ public class VelocityTemplater {
 
         return sw.toString();
     }
-
 }

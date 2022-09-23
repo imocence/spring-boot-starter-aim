@@ -19,7 +19,7 @@ import java.util.Map;
 public class MarkdownFormat implements Format {
 
     private Logger log = LoggerFactory.getLogger(getClass());
-    private VelocityTemplater templater = new VelocityTemplater("com/github/AIM/aim/spring/format/api.vm");
+    private VelocityTemplater templater = new VelocityTemplater("com/aim/spring/format/api.vm");
 
     @Override
     public String format(ApiDoc apiDoc) {
